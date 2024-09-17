@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Paneli - Basit CMS</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 1rem;
+        }
+
+        nav a {
+            color: white;
+            margin: 0 0.5rem;
+            text-decoration: none;
+        }
+
+        main {
+            padding: 1rem;
+        }
+
+        form {
+            margin-bottom: 1rem;
+        }
+
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        button {
+            padding: 0.5rem 1rem;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Admin Paneli</h1>
+        <nav>
+            <a href="index.html">Ana Sayfaya Dön</a>
+        </nav>
+    </header>
+
+    <main>
+        <section id="admin">
+            <h2>Gönderi Ekle</h2>
+            <form id="admin-form">
+                <label for="title">Başlık:</label>
+                <input type="text" id="title" required>
+                <br>
+                <label for="content">İçerik:</label>
+                <textarea id="content" rows="5" required></textarea>
+                <br>
+                <button type="submit">Gönderi Ekle</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Basit CMS</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const adminForm = document.getElementById('admin-form');
+
+            // Gönderi ekleme
+            adminForm.addEventListener('submit', (event) => {
+                event.preventDefault();
+                const title = document.getElementById('title').value;
+                const content = document.getElementById('content').value;
+                const posts = JSON.parse(localStorage.getItem('posts')) || [];
+                posts.push({ title, content });
+                localStorage.setItem('posts', JSON.stringify(posts));
+                adminForm.reset();
+                alert('Gönderi eklendi!');
+            });
+        });
+    </script>
+</body>
+</html>
