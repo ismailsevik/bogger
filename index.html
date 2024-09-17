@@ -36,6 +36,15 @@
             border-bottom: 1px solid #ddd;
             padding: 1rem 0;
         }
+
+        a {
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -68,9 +77,9 @@
             const loadPosts = () => {
                 postList.innerHTML = '';
                 const posts = JSON.parse(localStorage.getItem('posts')) || [];
-                posts.forEach(post => {
+                posts.forEach((post, index) => {
                     const listItem = document.createElement('li');
-                    listItem.innerHTML = `<h3>${post.title}</h3><p>${post.content}</p>`;
+                    listItem.innerHTML = `<a href="post.html?id=${index}">${post.title}</a>`;
                     postList.appendChild(listItem);
                 });
             };
