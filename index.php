@@ -1,9 +1,5 @@
 <?php
-$mysqli = new mysqli("localhost", "root", "", "simple_cms");
-
-if ($mysqli->connect_error) {
-    die("Connection failed: " . $mysqli->connect_error);
-}
+include 'includes/db.php';
 
 session_start();
 
