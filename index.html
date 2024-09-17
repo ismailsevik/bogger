@@ -27,28 +27,6 @@
             padding: 1rem;
         }
 
-        form {
-            margin-bottom: 1rem;
-        }
-
-        input[type="text"], textarea {
-            width: 100%;
-            padding: 0.5rem;
-            margin-bottom: 1rem;
-        }
-
-        button {
-            padding: 0.5rem 1rem;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #0056b3;
-        }
-
         ul {
             list-style-type: none;
             padding: 0;
@@ -65,7 +43,7 @@
         <h1>Basit CMS</h1>
         <nav>
             <a href="#posts">Gönderiler</a>
-            <a href="#admin">Admin Paneli</a>
+            <a href="admin.html">Admin Paneli</a>
         </nav>
     </header>
 
@@ -76,19 +54,6 @@
                 <!-- Gönderiler buraya JavaScript ile eklenecek -->
             </ul>
         </section>
-
-        <section id="admin">
-            <h2>Admin Paneli</h2>
-            <form id="admin-form">
-                <label for="title">Başlık:</label>
-                <input type="text" id="title" required>
-                <br>
-                <label for="content">İçerik:</label>
-                <textarea id="content" rows="5" required></textarea>
-                <br>
-                <button type="submit">Gönderi Ekle</button>
-            </form>
-        </section>
     </main>
 
     <footer>
@@ -98,7 +63,6 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const postList = document.getElementById('post-list');
-            const adminForm = document.getElementById('admin-form');
 
             // Yerel depolama ile gönderiler
             const loadPosts = () => {
@@ -110,18 +74,6 @@
                     postList.appendChild(listItem);
                 });
             };
-
-            // Gönderi ekleme
-            adminForm.addEventListener('submit', (event) => {
-                event.preventDefault();
-                const title = document.getElementById('title').value;
-                const content = document.getElementById('content').value;
-                const posts = JSON.parse(localStorage.getItem('posts')) || [];
-                posts.push({ title, content });
-                localStorage.setItem('posts', JSON.stringify(posts));
-                loadPosts();
-                adminForm.reset();
-            });
 
             // Sayfa yüklendiğinde gönderileri yükle
             loadPosts();
