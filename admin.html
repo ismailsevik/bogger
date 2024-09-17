@@ -31,7 +31,7 @@
             margin-bottom: 1rem;
         }
 
-        input[type="text"], textarea {
+        input[type="text"], input[type="password"], textarea {
             width: 100%;
             padding: 0.5rem;
             margin-bottom: 1rem;
@@ -48,6 +48,10 @@
         button:hover {
             background-color: #0056b3;
         }
+
+        .hidden {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -59,7 +63,21 @@
     </header>
 
     <main>
-        <section id="admin">
+        <section id="login-section">
+            <h2>Giriş Yap</h2>
+            <form id="login-form">
+                <label for="username">Kullanıcı Adı:</label>
+                <input type="text" id="username" required>
+                <br>
+                <label for="password">Şifre:</label>
+                <input type="password" id="password" required>
+                <br>
+                <button type="submit">Giriş Yap</button>
+                <p id="login-error" style="color: red; display: none;">Geçersiz kullanıcı adı veya şifre.</p>
+            </form>
+        </section>
+
+        <section id="admin-section" class="hidden">
             <h2>Gönderi Ekle</h2>
             <form id="admin-form">
                 <label for="title">Başlık:</label>
@@ -79,7 +97,26 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            const loginForm = document.getElementById('login-form');
+            const adminSection = document.getElementById('admin-section');
+            const loginSection = document.getElementById('login-section');
+            const loginError = document.getElementById('login-error');
             const adminForm = document.getElementById('admin-form');
+
+            // Giriş kontrolü
+            loginForm.addEventListener('submit', (event) => {
+                event.preventDefault();
+                const username = document.getElementById('username').value;
+                const password = document.getElementById('password').value;
+
+                // Basit kullanıcı adı ve parola kontrolü
+                if (username === 'admin' && password === 'password') {
+                    loginSection.classList.add('hidden');
+                    adminSection.classList.remove('hidden');
+                } else {
+                    loginError.style.display = 'block';
+                }
+            });
 
             // Gönderi ekleme
             adminForm.addEventListener('submit', (event) => {
