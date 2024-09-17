@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gönderi - Basit CMS</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 1rem;
+        }
+
+        nav a {
+            color: white;
+            margin: 0 0.5rem;
+            text-decoration: none;
+        }
+
+        main {
+            padding: 1rem;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Gönderi</h1>
+        <nav>
+            <a href="index.html">Ana Sayfaya Dön</a>
+        </nav>
+    </header>
+
+    <main>
+        <section id="post-content">
+            <!-- Gönderi içeriği buraya JavaScript ile yüklenecek -->
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Basit CMS</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const postContent = document.getElementById('post-content');
+
+            // Gönderi ID'sini al
+            const urlParams = new URLSearchParams(window.location.search);
+            const postId = urlParams.get('id');
+
+            if (postId !== null) {
+                const posts = JSON.parse(localStorage.getItem('posts')) || [];
+                const post = posts[postId];
+
+                if (post) {
+                    postContent.innerHTML = `<h2>${post.title}</h2><p>${post.content}</p>`;
+                } else {
+                    postContent.innerHTML = '<p>Gönderi bulunamadı.</p>';
+                }
+            } else {
+                postContent.innerHTML = '<p>Gönderi bulunamadı.</p>';
+            }
+        });
+    </script>
+</body>
+</html>
